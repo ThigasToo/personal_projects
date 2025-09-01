@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel de Mensagens Especiais</title>
+  <style>
+    body {
+      overflow: hidden;
+      font-family: "Roboto", serif;
+      background: linear-gradient(135deg, black, #220033);
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+    }
+
+    .carousel {
+      position: relative;
+      z-index: 1;
+      height: 100vh;
+      overflow: hidden;
+      pointer-events: none;
+      width: 100%;
+    }
+
+    .carousel-item {
+      --items: 10;
+      --width: clamp(150px, 30vw, 300px);
+      --height: clamp(200px, 40vw, 400px);
+      --x: calc(var(--active) * 800%);
+      --y: calc(var(--active) * 200%);
+      --rot: calc(var(--active) * 120deg);
+      --opacity: calc(var(--zIndex) / var(--items) * 1.5);
+      overflow: hidden;
+      position: absolute;
+      z-index: var(--zIndex);
+      width: var(--width);
+      height: var(--height);
+      margin: calc(var(--height) * -0.5) 0 0 calc(var(--width) * -0.5);
+      border-radius: 10px;
+      top: 50%;
+      left: 50%;
+      user-select: none;
+      transform-origin: 0% 100%;
+      box-shadow: 0 10px 50px 10px rgba(0, 0, 0, 0.5);
+      background: black;
+      pointer-events: all;
+      transform: translate(var(--x), var(--y)) rotate(var(--rot));
+      transition: transform 0.8s cubic-bezier(0, 0.02, 0, 1);
+    }
+    
+    .carousel-item .carousel-box {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+      opacity: var(--opacity);
+      font-family: "Arial", sans-serif;
+    }
+    
+    .carousel-item .carousel-box:before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.5));
+    }
+    
+    .carousel-item .title {
+      position: absolute;
+      z-index: 2;
+      color: #fff;
+      bottom: 20px;
+      left: 20px;
+      transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+      font-size: clamp(16px, 3vw, 24px);
+      text-shadow: 0 4px 4px rgba(0, 0, 0, 0.5);
+      font-weight: bold;
+      max-width: 80%;
+    }
+    
+    .carousel-item .num {
+      position: absolute;
+      z-index: 2;
+      color: #fff;
+      top: 10px;
+      left: 20px;
+      transition: opacity 0.8s cubic-bezier(0, 0.02, 0, 1);
+      font-size: clamp(20px, 5vw, 40px);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+    }
+
+    .cursor {
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      --size: 40px;
+      width: var(--size);
+      height: var(--size);
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      margin: calc(var(--size) * -0.5) 0 0 calc(var(--size) * -0.5);
+      transition: transform 0.85s cubic-bezier(0, 0.02, 0, 1);
+      display: none;
+      pointer-events: none;
+    }
+    
+    @media (pointer: fine) {
+      .cursor {
+        display: block;
+      }
+    }
+
+    .cursor2 {
+      --size: 2px;
+      transition-duration: 0.7s;
+    }
+
+    .instructions {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 5;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="carousel">
+    <div class="carousel-item">
+        <div class="carousel-box">
+            <div class="title">Oi 👋</div>
+            <div class="num"></div>
+        </div>
+    </div>
+
+    <div class="carousel-item">
+        <div class="carousel-box">
+            <div class="title">Fiz isso para te dizer😍</div>
+            <div class="num"></div>
+        </div>
+    </div>
+
+    <div class="carousel-item">
+        <div class="carousel-box">
+            <div class="title">(Continue rolando😊) </div>
+            <div class="num"></div>
+        </div>
+    </div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">Você é linda 🤩 </div>
+			<div class="num">01</div>
+			<img src=""/>
+		</div>
+	</div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">Pessoa mais perfeita da terra 💯</div>
+			<div class="num">02</div>
+			<img src="">
+		</div>
+	</div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">Somos fodas juntos 🎀</div>
+			<div class="num">03</div>
+			<img src="">
+		</div>
+	</div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">E desde que te conheci 😗 </div>
+			<div class="num">04</div>
+			<img src="">
+		</div>
+	</div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">Não conseguia não te adorar 😇</div>
+			<div class="num">05</div>
+			<img src=""/>
+		</div>
+	</div>
+
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">Eu te amo 🥰</div>
+			<div class="num">06</div>
+			<img src=""/>
+		</div>
+	</div>
+	
+	<div class="carousel-item">
+		<div class="carousel-box">
+			<div class="title">❤️</div>
+			<div class="num">07</div>
+			<img src=""/>
+		</div>
+	</div>
+</div>
+
+<div class="instructions">Use a roda do mouse para navegar • Clique em um item para ir diretamente para ele</div>
+
+<div class="cursor"></div>
+<div class="cursor cursor2"></div>
+
+<script>
+/*--------------------
+Vars
+--------------------*/
+let progress = 0
+let startX = 0
+let active = 0
+let isDown = false
+
+/*--------------------
+Contants
+--------------------*/
+const speedWheel = 0.02
+const speedDrag = -0.1
+
+/*--------------------
+Get Z
+--------------------*/
+const getZindex = (array, index) => (array.map((_, i) => (index === i) ? array.length : array.length - Math.abs(index - i)))
+
+/*--------------------
+Items
+--------------------*/
+const $items = document.querySelectorAll('.carousel-item')
+const $cursors = document.querySelectorAll('.cursor')
+
+const displayItems = (item, index, active) => {
+  const zIndex = getZindex([...$items], active)[index]
+  item.style.setProperty('--zIndex', zIndex)
+  item.style.setProperty('--active', (index-active)/$items.length)
+}
+
+/*--------------------
+Animate
+--------------------*/
+const animate = () => {
+  progress = Math.max(0, Math.min(progress, 100))
+  active = Math.floor(progress/100*($items.length-1))
+  
+  $items.forEach((item, index) => displayItems(item, index, active))
+}
+animate()
+
+/*--------------------
+Click on Items
+--------------------*/
+$items.forEach((item, i) => {
+  item.addEventListener('click', () => {
+    progress = (i/$items.length) * 100 + 10
+    animate()
+  })
+})
+
+/*--------------------
+Handlers
+--------------------*/
+const handleWheel = e => {
+  const wheelProgress = e.deltaY * speedWheel
+  progress = progress + wheelProgress
+  animate()
+}
+
+const handleMouseMove = (e) => {
+  if (e.type === 'mousemove') {
+    $cursors.forEach(($cursor) => {
+      $cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+    })
+  }
+  if (!isDown) return
+  const x = e.clientX || (e.touches && e.touches[0].clientX) || 0
+  const mouseProgress = (x - startX) * speedDrag
+  progress = progress + mouseProgress
+  startX = x
+  animate()
+}
+
+const handleMouseDown = e => {
+  isDown = true
+  startX = e.clientX || (e.touches && e.touches[0].clientX) || 0
+}
+
+const handleMouseUp = () => {
+  isDown = false
+}
+
+/*--------------------
+Listeners
+--------------------*/
+document.addEventListener('mousewheel', handleWheel)
+document.addEventListener('mousedown', handleMouseDown)
+document.addEventListener('mousemove', handleMouseMove)
+document.addEventListener('mouseup', handleMouseUp)
+document.addEventListener('touchstart', handleMouseDown)
+document.addEventListener('touchmove', handleMouseMove)
+document.addEventListener('touchend', handleMouseUp)
+</script>
+
+</body>
+</html>
