@@ -4,10 +4,10 @@ Este é um pequeno projeto pessoal e afetivo: uma página web de arquivo único 
 
 O projeto é construído inteiramente com HTML, CSS e JavaScript vanilla, sem a necessidade de bibliotecas externas.
 
-![Demo do Carrossel](https://i.imgur.com/link-para-seu-gif-ou-imagem.gif)
-*(Sugestão: grave um GIF da tela para colocar aqui e mostrar o efeito!)*
+![gif_moca_bonita](https://github.com/user-attachments/assets/0e7043a0-ee0e-44b3-808b-02844709e127)
 
 ## 🚀 Como Funciona
+
 
 A interação com o carrossel é simples e fluida. O usuário pode navegar pelas mensagens de três maneiras:
 * **Roda do Mouse (Scroll):** Role para cima ou para baixo para avançar ou retroceder.
